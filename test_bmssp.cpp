@@ -2,6 +2,8 @@
 #include "sssp/graph.hpp"
 #include "sssp/types.hpp"
 #include <gtest/gtest.h>
+#include <cmath>
+
 
 using namespace sssp;
 
