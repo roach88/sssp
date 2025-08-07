@@ -1,13 +1,13 @@
-test_paths 3 0.0191694
-test_distance_queries 4 0.012896
-test_tie_break 4 0.011988
-test_base_case 2 0.0250961
-test_bmssp 2 0.0261207
-test_binary_heap 2 0.128665
-test_block_structure 1 0.0493089
-test_graph 1 0.0441964
-test_transform 1 0.0458225
-test_find_pivots 1 0.0557237
-test_validate_transform 1 0.0715077
-test_complexity 1 0.109695
+test_paths 4 0.0721478
+test_distance_queries 5 0.0388367
+test_tie_break 5 0.0347107
+test_base_case 3 0.0659361
+test_bmssp 3 0.060038
+test_binary_heap 3 0.127265
+test_block_structure 2 0.117048
+test_graph 2 0.0899434
+test_transform 2 0.096964
+test_find_pivots 2 0.101594
+test_validate_transform 2 0.110886
+test_complexity 2 0.136489
 ---

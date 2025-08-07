@@ -10,6 +10,7 @@
 #include <unordered_set>
 #include <vector>
 #include <limits>
+
 #ifdef SSSP_PROFILE
 #include "sssp/profiling.hpp"
 #endif
@@ -29,6 +30,9 @@ public:
 #endif
         BMSSPResult res{B, {}};
         if (S.empty()) return res;
+
+
+
         if (l <= 0) {
             BaseCaseResult bc = BaseCase::run(G, B, S.front(), state, k);
             res.B_prime = bc.B_prime;
@@ -40,6 +44,9 @@ public:
         std::vector<Vertex> P(piv.P.begin(), piv.P.end());
         std::vector<Vertex> W(piv.W.begin(), piv.W.end());
         std::size_t M = (std::size_t)1 << ((l - 1) * (int)t);
+
+
+
         BlockDataStructure D;
         D.Initialize(M, B);
         for (auto p : P) {
@@ -52,15 +59,21 @@ public:
         Si.reserve(M);
         std::vector<BlockDataStructure::KeyValuePair> Kbuf;
         Kbuf.reserve(16);
+
         while (!D.empty()) {
+
             auto pulled = D.Pull();
             Si.clear();
             Si.reserve(pulled.first.size());
             for (auto& kv : pulled.first) Si.push_back(kv.first);
             Weight Bi = pulled.second;
-            if (Si.empty()) break;
+
+                        if (Si.empty()) break;
             BMSSPResult sub = run(G, l - 1, Bi, Si, state, k, t);
             current_Bp = std::min(current_Bp, sub.B_prime);
+
+
+
             for (auto u : sub.U) {
                 if (Uset.insert(u).second) res.U.push_back(u);
                 for (const auto& e : G.get_outgoing_edges(u)) {
@@ -81,12 +94,15 @@ public:
                     }
                 }
             }
-            if (Uset.size() > k * ((std::size_t)1 << (l * t))) break;
+
+                        if (Uset.size() > k * ((std::size_t)1 << (l * t))) break;
         }
         for (auto w : W) {
             if (Uset.insert(w).second) res.U.push_back(w);
         }
         res.B_prime = current_Bp;
+
+
         return res;
     }
 };

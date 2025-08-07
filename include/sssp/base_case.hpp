@@ -22,7 +22,7 @@ struct BaseCaseResult {
 
 class BaseCase {
 public:
-    static BaseCaseResult run(const Graph& G, Weight B, const Vertex& x, DistState& state, std::size_t k) {
+    static BaseCaseResult run(const Graph& G, Weight B, const Vertex& x, DistState& state, std::size_t k [[maybe_unused]]) {
 #ifdef SSSP_PROFILE
         ScopeTimer timer(&prof().basecase_ns);
 #endif
@@ -32,7 +32,7 @@ public:
         if (state.get(x.id()) == INFINITE_WEIGHT) state.set(x.id(), 0.0);
         H.insert(x, state.get(x.id()));
         std::unordered_set<Vertex> in_U;
-        while (!H.empty() && in_U.size() < k + 1) {
+        while (!H.empty()) {
             auto [u, du] = H.extract_min();
             if (du >= B) { res.B_prime = B; break; }
             if (in_U.insert(u).second) res.U.push_back(u);
@@ -50,8 +50,13 @@ public:
                 }
             }
         }
-        if (in_U.size() >= k + 1) {
-            if (!res.U.empty()) res.B_prime = state.get(res.U.back().id());
+        // Set B_prime to the maximum distance found, or B if no vertices were explored
+        if (!res.U.empty()) {
+            Weight max_dist = 0.0;
+            for (const auto& u : res.U) {
+                max_dist = std::max(max_dist, state.get(u.id()));
+            }
+            res.B_prime = max_dist;
         }
         return res;
     }
