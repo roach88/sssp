@@ -1,0 +1,83 @@
+# Build directories
+build/
+cmake-build-*/
+out/
+bin/
+lib/
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.cmake
+!CMakeLists.txt
+
+# Compiled files
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+*.dylib
+*.exe
+
+# IDE directories
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.clangd/
+compile_commands.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Documentation build
+docs/build/
+docs/_build/
+*.doxygen
+
+# Testing
+*.gcda
+*.gcno
+*.gcov
+coverage/
+test_results/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dev-debug.log
+
+# Debug files
+*.dSYM/
+*.pdb
+
+# Node modules (for potential tooling)
+node_modules/
+
+# Python (for potential scripts)
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/ 

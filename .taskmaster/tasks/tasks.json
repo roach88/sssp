@@ -1,0 +1,1382 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Setup Project Repository",
+        "description": "Initialize the project repository with necessary configurations and structure.",
+        "details": "Create a new Git repository. Set up the directory structure for the project including src, include, tests, and docs folders. Initialize a CMake project for cross-platform compatibility. Add a README.md with basic project information.",
+        "testStrategy": "Verify the repository structure and ensure CMake can generate build files without errors.",
+        "priority": "medium",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create Git Repository",
+            "description": "Initialize a new Git repository for the project.",
+            "dependencies": [],
+            "details": "Use Git to create a new repository in the desired directory. Run 'git init' to initialize the repository. Ensure that the repository is set up with a .gitignore file to exclude unnecessary files from version control.",
+            "status": "done",
+            "testStrategy": "Verify that the repository is initialized by checking for the presence of the .git directory and ensuring that 'git status' shows no errors."
+          },
+          {
+            "id": 2,
+            "title": "Set Up Directory Structure",
+            "description": "Create the necessary directory structure for the project.",
+            "dependencies": [
+              "1.1"
+            ],
+            "details": "Create the following directories within the project root: 'src' for source files, 'include' for header files, 'tests' for test cases, and 'docs' for documentation. Ensure each directory is empty or contains a placeholder file to maintain structure in version control.",
+            "status": "done",
+            "testStrategy": "Check that all specified directories exist and are correctly named. Verify that they are tracked in the Git repository."
+          },
+          {
+            "id": 3,
+            "title": "Initialize CMake Project",
+            "description": "Set up a CMake project for cross-platform compatibility.",
+            "dependencies": [
+              "1.2"
+            ],
+            "details": "Create a CMakeLists.txt file in the project root. Define the minimum required CMake version and project name. Set up basic configurations to include 'src' and 'include' directories. Ensure that the CMake configuration can generate build files without errors.\n<info added on 2025-08-07T02:58:30.237Z>\nCMakeLists.txt has been created successfully with comprehensive configuration for C++17, compiler flags, library building, testing support, and installation rules. Note: CMake is not currently installed on the system, so actual build generation will need to be tested after CMake installation.\n</info added on 2025-08-07T02:58:30.237Z>",
+            "status": "done",
+            "testStrategy": "Run 'cmake .' in the project root and verify that build files are generated successfully without errors."
+          },
+          {
+            "id": 4,
+            "title": "Add README.md",
+            "description": "Create a README.md file with basic project information.",
+            "dependencies": [
+              "1.1"
+            ],
+            "details": "Write a README.md file that includes the project name, a brief description, setup instructions, and any other relevant information. Ensure it provides a clear overview of the project for new developers.",
+            "status": "done",
+            "testStrategy": "Review the README.md file to ensure it is informative and free of typos. Verify that it is correctly formatted in Markdown."
+          },
+          {
+            "id": 5,
+            "title": "Commit Initial Setup",
+            "description": "Commit the initial setup to the Git repository.",
+            "dependencies": [
+              "1.1",
+              "1.2",
+              "1.3",
+              "1.4"
+            ],
+            "details": "Stage all changes using 'git add .' and commit them with a message like 'Initial project setup'. Ensure that all files and directories are included in the commit.",
+            "status": "in-progress",
+            "testStrategy": "Run 'git log' to verify that the commit is present and includes all intended files. Check that the repository is clean with 'git status'."
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Implement Basic Graph Representation",
+        "description": "Develop the core data structures to represent directed graphs with real non-negative edge weights.",
+        "details": "Define classes for Graph, Vertex, and Edge. Implement methods to add vertices and edges, and to retrieve adjacency lists. Ensure the graph can handle large datasets efficiently.",
+        "testStrategy": "Create unit tests to add and retrieve vertices and edges, ensuring correct graph representation.",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Define Vertex Class",
+            "description": "Create a class to represent a vertex in the graph, including necessary attributes.",
+            "dependencies": [],
+            "details": "Implement a Vertex class that includes attributes such as an identifier and any additional metadata needed for graph operations. Ensure the class is lightweight to handle large datasets efficiently.",
+            "status": "pending",
+            "testStrategy": "Write unit tests to instantiate Vertex objects and verify attribute assignments."
+          },
+          {
+            "id": 2,
+            "title": "Define Edge Class",
+            "description": "Create a class to represent an edge in the graph, including source, destination, and weight.",
+            "dependencies": [
+              "2.1"
+            ],
+            "details": "Implement an Edge class with attributes for the source vertex, destination vertex, and a non-negative real number representing the weight. Ensure the class supports easy retrieval of these attributes.",
+            "status": "pending",
+            "testStrategy": "Write unit tests to instantiate Edge objects and verify correct attribute storage and retrieval."
+          },
+          {
+            "id": 3,
+            "title": "Define Graph Class",
+            "description": "Create a class to represent the graph, incorporating vertices and edges.",
+            "dependencies": [
+              "2.1",
+              "2.2"
+            ],
+            "details": "Implement a Graph class that maintains a collection of Vertex and Edge objects. Include data structures to efficiently store and access vertices and edges, such as adjacency lists or maps.",
+            "status": "pending",
+            "testStrategy": "Write unit tests to instantiate the Graph object and verify the correct initialization of internal data structures."
+          },
+          {
+            "id": 4,
+            "title": "Implement Add Vertex and Edge Methods",
+            "description": "Develop methods within the Graph class to add vertices and edges.",
+            "dependencies": [
+              "2.3"
+            ],
+            "details": "Implement methods in the Graph class to add Vertex and Edge objects. Ensure that adding a vertex or edge updates the internal data structures appropriately, maintaining graph integrity.",
+            "status": "pending",
+            "testStrategy": "Write unit tests to add vertices and edges to the graph and verify that the internal structures reflect these additions accurately."
+          },
+          {
+            "id": 5,
+            "title": "Implement Adjacency List Retrieval",
+            "description": "Develop a method to retrieve the adjacency list for a given vertex.",
+            "dependencies": [
+              "2.4"
+            ],
+            "details": "Implement a method in the Graph class to return the adjacency list of a specified vertex. Ensure the method is efficient and can handle large graphs by leveraging the internal data structures.",
+            "status": "pending",
+            "testStrategy": "Write unit tests to retrieve adjacency lists for various vertices and verify the correctness of the returned data."
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Implement Constant-Degree Transformation",
+        "description": "Transform arbitrary graphs to constant in/out-degree while preserving shortest paths.",
+        "details": "Implement a transformation function that substitutes zero-weight cycles and adjusts degrees to a maximum of 2. Ensure the transformation maintains O(m) vertices and edges.",
+        "testStrategy": "Test with graphs of varying densities to ensure transformation correctness and efficiency.",
+        "priority": "high",
+        "dependencies": [
+          2
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Analyze Graph Structure",
+            "description": "Analyze the input graph to identify nodes with degrees exceeding the constant degree limit and detect zero-weight cycles.",
+            "dependencies": [],
+            "details": "Implement a function to traverse the graph and collect information on node degrees and zero-weight cycles. Use a depth-first or breadth-first search to efficiently gather this data.",
+            "status": "pending",
+            "testStrategy": "Test with graphs of varying sizes and structures to ensure accurate analysis of node degrees and cycle detection."
+          },
+          {
+            "id": 2,
+            "title": "Substitute Zero-Weight Cycles",
+            "description": "Implement a mechanism to substitute zero-weight cycles in the graph to maintain shortest path properties.",
+            "dependencies": [
+              "3.1"
+            ],
+            "details": "Develop a function that identifies zero-weight cycles and replaces them with equivalent structures that preserve shortest path properties. Ensure that the transformation does not increase the graph's complexity.",
+            "status": "pending",
+            "testStrategy": "Verify that the substitution maintains shortest paths by comparing path lengths before and after transformation on test graphs."
+          },
+          {
+            "id": 3,
+            "title": "Adjust Node Degrees",
+            "description": "Transform the graph to ensure all nodes have a maximum in/out-degree of 2.",
+            "dependencies": [
+              "3.1"
+            ],
+            "details": "Implement logic to split nodes with degrees greater than 2 into multiple nodes connected by zero-weight edges, ensuring that the overall graph structure and shortest paths are preserved.",
+            "status": "pending",
+            "testStrategy": "Test with graphs containing nodes of varying degrees to ensure the transformation correctly limits degrees without altering shortest paths."
+          },
+          {
+            "id": 4,
+            "title": "Optimize Graph Structure",
+            "description": "Optimize the transformed graph to maintain O(m) vertices and edges.",
+            "dependencies": [
+              "3.2",
+              "3.3"
+            ],
+            "details": "Review the transformed graph and apply optimizations to ensure that the number of vertices and edges remains within O(m). This may involve merging redundant nodes or edges.",
+            "status": "pending",
+            "testStrategy": "Test with large graphs to ensure that the optimization process maintains the desired complexity bounds."
+          },
+          {
+            "id": 5,
+            "title": "Validate Transformation",
+            "description": "Develop a validation suite to ensure the transformation maintains shortest paths and adheres to complexity constraints.",
+            "dependencies": [
+              "3.4"
+            ],
+            "details": "Create a set of test cases that verify the correctness of the transformation by comparing shortest paths before and after the transformation. Ensure that the graph adheres to the O(m) complexity constraint.",
+            "status": "pending",
+            "testStrategy": "Run the validation suite on a variety of graph configurations to ensure the transformation is both correct and efficient."
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Develop Specialized Block-Based Data Structure",
+        "description": "Create an adaptive linked list structure for efficient frontier management in the BMSSP algorithm.",
+        "details": "Implement Initialize, Insert, Batch Prepend, and Pull operations. Use a self-balancing BST for managing block upper bounds and implement split operations for block size management.",
+        "testStrategy": "Unit test each operation for correctness and performance under various scenarios.",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Initialize Adaptive Linked List Structure",
+            "description": "Develop the initialization logic for the adaptive linked list structure to be used in the BMSSP algorithm.",
+            "dependencies": [],
+            "details": "Create a class or module to represent the adaptive linked list. Define the data structure's properties, including pointers to the head and tail of the list, and any metadata required for efficient management. Ensure the structure is ready to handle dynamic operations such as insertions and deletions.",
+            "status": "pending",
+            "testStrategy": "Write unit tests to verify that the linked list initializes correctly with no elements and can handle basic operations without errors."
+          },
+          {
+            "id": 2,
+            "title": "Implement Insert Operation",
+            "description": "Develop the insert operation for adding elements to the adaptive linked list.",
+            "dependencies": [
+              "4.1"
+            ],
+            "details": "Implement a method to insert new elements into the list. Ensure that the operation maintains the list's adaptive properties, such as balancing and efficient traversal. Consider edge cases like inserting into an empty list or at the head or tail.",
+            "status": "pending",
+            "testStrategy": "Test the insert operation with various scenarios, including inserting at different positions and into an empty list, to ensure correctness and performance."
+          },
+          {
+            "id": 3,
+            "title": "Implement Batch Prepend Operation",
+            "description": "Develop the batch prepend operation to efficiently add multiple elements to the start of the list.",
+            "dependencies": [
+              "4.1"
+            ],
+            "details": "Create a method that allows multiple elements to be prepended to the list in a single operation. Optimize for performance by minimizing pointer adjustments and ensuring the list remains balanced.",
+            "status": "pending",
+            "testStrategy": "Test the batch prepend operation with different batch sizes to ensure it performs efficiently and maintains list integrity."
+          },
+          {
+            "id": 4,
+            "title": "Integrate Self-Balancing BST for Block Management",
+            "description": "Integrate a self-balancing binary search tree (BST) to manage block upper bounds within the linked list.",
+            "dependencies": [
+              "4.1"
+            ],
+            "details": "Implement a self-balancing BST to track and manage the upper bounds of blocks within the list. Ensure that the BST operations (insert, delete, search) are efficient and maintain the tree's balance. This will help in managing the dynamic nature of the list's blocks.",
+            "status": "pending",
+            "testStrategy": "Verify the BST integration by testing operations that modify block boundaries, ensuring the tree remains balanced and correctly reflects the list's state."
+          },
+          {
+            "id": 5,
+            "title": "Implement Pull and Split Operations",
+            "description": "Develop the pull and split operations to manage block size and ensure efficient frontier management.",
+            "dependencies": [
+              "4.2",
+              "4.3",
+              "4.4"
+            ],
+            "details": "Implement the pull operation to retrieve elements from the list efficiently. Develop the split operation to divide blocks when they exceed a certain size, using the BST to manage these changes. Ensure these operations are optimized for performance and maintain the adaptive nature of the list.",
+            "status": "pending",
+            "testStrategy": "Test the pull and split operations under various conditions, such as different block sizes and list states, to ensure they function correctly and efficiently."
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Implement Binary Heap for BaseCase Procedure",
+        "description": "Develop a binary heap to support Dijkstra-like operations in the BaseCase procedure.",
+        "details": "Implement ExtractMin, Insert, and DecreaseKey operations. Ensure the heap is efficient and can handle large datasets.",
+        "testStrategy": "Test heap operations for correctness and performance with large input sizes.",
+        "priority": "medium",
+        "dependencies": [
+          1
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Design Binary Heap Structure",
+            "description": "Create the data structure for the binary heap, including the necessary properties and initial setup.",
+            "dependencies": [],
+            "details": "Define a class or struct to represent the binary heap. Include properties for the heap array, size, and any other necessary metadata. Initialize the heap with a fixed or dynamic size array, depending on the expected dataset size.",
+            "status": "pending",
+            "testStrategy": "Verify the initial heap structure by checking the properties and ensuring no elements are present initially."
+          },
+          {
+            "id": 2,
+            "title": "Implement Insert Operation",
+            "description": "Develop the Insert operation to add elements to the binary heap while maintaining heap properties.",
+            "dependencies": [
+              "5.1"
+            ],
+            "details": "Implement the Insert function to add a new element to the heap. Ensure the heap property is maintained by performing an 'up-heap' or 'bubble-up' operation. Handle cases where the heap needs to be resized.",
+            "status": "pending",
+            "testStrategy": "Test the Insert operation by adding multiple elements and verifying the heap property is maintained after each insertion."
+          },
+          {
+            "id": 3,
+            "title": "Implement ExtractMin Operation",
+            "description": "Develop the ExtractMin operation to remove and return the smallest element from the binary heap.",
+            "dependencies": [
+              "5.1",
+              "5.2"
+            ],
+            "details": "Implement the ExtractMin function to remove the root element (smallest) from the heap. Replace the root with the last element and perform a 'down-heap' or 'bubble-down' operation to restore the heap property.",
+            "status": "pending",
+            "testStrategy": "Test the ExtractMin operation by repeatedly extracting elements from the heap and ensuring they are returned in non-decreasing order."
+          },
+          {
+            "id": 4,
+            "title": "Implement DecreaseKey Operation",
+            "description": "Develop the DecreaseKey operation to decrease the value of a key in the heap and maintain heap properties.",
+            "dependencies": [
+              "5.1",
+              "5.2"
+            ],
+            "details": "Implement the DecreaseKey function to update the value of a specified element in the heap. Perform an 'up-heap' operation to restore the heap property if the new key is smaller.",
+            "status": "pending",
+            "testStrategy": "Test the DecreaseKey operation by decreasing keys of various elements and verifying the heap property is maintained."
+          },
+          {
+            "id": 5,
+            "title": "Optimize and Test Heap for Large Datasets",
+            "description": "Ensure the binary heap is optimized for performance and test it with large datasets to validate efficiency.",
+            "dependencies": [
+              "5.2",
+              "5.3",
+              "5.4"
+            ],
+            "details": "Review the implementation for potential optimizations, such as reducing memory usage or improving time complexity. Conduct performance tests using large datasets to ensure the heap operations remain efficient.",
+            "status": "pending",
+            "testStrategy": "Perform stress testing with large datasets to measure performance and ensure operations complete within acceptable time limits."
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Implement BaseCase Procedure",
+        "description": "Develop the BaseCase procedure acting as a mini-Dijkstra's algorithm at recursion level 0.",
+        "details": "Use the binary heap to efficiently extract vertices. Handle singleton source sets and maintain C|U| log k time complexity.",
+        "testStrategy": "Test with small graphs to ensure correct shortest path calculations.",
+        "priority": "high",
+        "dependencies": [
+          2,
+          5
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Initialize Data Structures",
+            "description": "Set up necessary data structures for the BaseCase procedure, including the binary heap and distance map.",
+            "dependencies": [],
+            "details": "Implement a binary heap to manage vertices efficiently. Initialize a map to store the shortest known distances from the source to each vertex, setting the source's distance to zero and all others to infinity.",
+            "status": "pending",
+            "testStrategy": "Verify the correct initialization of data structures with a simple graph setup."
+          },
+          {
+            "id": 2,
+            "title": "Implement Vertex Extraction",
+            "description": "Develop the logic to extract the vertex with the minimum distance from the binary heap.",
+            "dependencies": [
+              "6.1"
+            ],
+            "details": "Use the binary heap to efficiently extract the vertex with the smallest distance value. Ensure that the heap property is maintained after each extraction.",
+            "status": "pending",
+            "testStrategy": "Test extraction with a small graph to confirm that vertices are extracted in the correct order of their distances."
+          },
+          {
+            "id": 3,
+            "title": "Relax Edges",
+            "description": "Implement the edge relaxation process for the extracted vertex to update distances to its adjacent vertices.",
+            "dependencies": [
+              "6.2"
+            ],
+            "details": "For each adjacent vertex of the extracted vertex, calculate the potential new distance. If this distance is smaller than the currently known distance, update the distance map and adjust the vertex's position in the heap.",
+            "status": "pending",
+            "testStrategy": "Use a graph with known shortest paths to ensure that edge relaxation updates distances correctly."
+          },
+          {
+            "id": 4,
+            "title": "Handle Singleton Source Sets",
+            "description": "Ensure the procedure correctly handles cases where the source set contains only one vertex.",
+            "dependencies": [
+              "6.3"
+            ],
+            "details": "Implement checks to handle singleton source sets efficiently, ensuring that the algorithm can start and terminate correctly when only one source is present.",
+            "status": "pending",
+            "testStrategy": "Test with a graph where the source set is a single vertex to ensure correct handling and termination."
+          },
+          {
+            "id": 5,
+            "title": "Optimize for C|U| log k Time Complexity",
+            "description": "Optimize the BaseCase procedure to maintain the required time complexity.",
+            "dependencies": [
+              "6.4"
+            ],
+            "details": "Review and optimize the implementation to ensure that all operations, particularly those involving the binary heap, adhere to the C|U| log k time complexity requirement.",
+            "status": "pending",
+            "testStrategy": "Benchmark the procedure with increasingly large graphs to verify that the time complexity remains within acceptable limits."
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Implement FindPivots Procedure",
+        "description": "Develop the FindPivots procedure for frontier reduction and pivot identification.",
+        "details": "Implement k-step relaxation and construct a directed forest for pivot identification. Ensure time complexity of O(min{k²|S|, k|Ũ|}).",
+        "testStrategy": "Test with various graph sizes to ensure correct pivot identification and performance.",
+        "priority": "high",
+        "dependencies": [
+          2,
+          4
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Initialize Data Structures for FindPivots",
+            "description": "Set up necessary data structures for the FindPivots procedure, including arrays and lists to track vertices, edges, and pivot candidates.",
+            "dependencies": [],
+            "details": "Create data structures to store the current state of vertices and edges. Initialize lists to keep track of potential pivots and their associated properties. Ensure these structures can efficiently support the operations required in subsequent steps.",
+            "status": "pending",
+            "testStrategy": "Verify that data structures are correctly initialized and can store and retrieve data as expected."
+          },
+          {
+            "id": 2,
+            "title": "Implement k-Step Relaxation",
+            "description": "Develop the k-step relaxation process to update vertex distances and identify potential pivots.",
+            "dependencies": [
+              "7.1"
+            ],
+            "details": "Implement a loop that iterates k times, updating the distances of vertices based on the shortest path calculations. Use a priority queue to efficiently manage vertex updates. Ensure the relaxation process respects the time complexity constraints.",
+            "status": "pending",
+            "testStrategy": "Test the relaxation process with small graphs to ensure distances are updated correctly and potential pivots are identified."
+          },
+          {
+            "id": 3,
+            "title": "Construct Directed Forest for Pivot Identification",
+            "description": "Build a directed forest structure to facilitate the identification of pivots from the relaxed vertices.",
+            "dependencies": [
+              "7.2"
+            ],
+            "details": "Use the updated vertex distances to construct a directed forest. Each tree in the forest should represent a potential pivot and its reachable vertices. Ensure the forest structure supports efficient traversal and pivot identification.",
+            "status": "pending",
+            "testStrategy": "Validate the forest structure by checking that all vertices are correctly assigned to trees and that potential pivots are accurately represented."
+          },
+          {
+            "id": 4,
+            "title": "Optimize Time Complexity",
+            "description": "Refine the implementation to ensure the overall time complexity meets the O(min{k²|S|, k|Ũ|}) requirement.",
+            "dependencies": [
+              "7.3"
+            ],
+            "details": "Analyze the current implementation for bottlenecks and optimize data structures and algorithms to achieve the desired time complexity. Consider using advanced data structures like Fibonacci heaps if necessary.",
+            "status": "pending",
+            "testStrategy": "Benchmark the procedure with varying sizes of input graphs to ensure it meets the time complexity requirements."
+          },
+          {
+            "id": 5,
+            "title": "Integrate and Test FindPivots Procedure",
+            "description": "Combine all components of the FindPivots procedure and perform comprehensive testing to ensure functionality and performance.",
+            "dependencies": [
+              "7.4"
+            ],
+            "details": "Integrate the initialized data structures, k-step relaxation, and directed forest into a cohesive procedure. Conduct extensive testing with graphs of different sizes and complexities to validate the correctness and efficiency of pivot identification.",
+            "status": "pending",
+            "testStrategy": "Use a suite of test cases with known outcomes to verify the accuracy of pivot identification and measure performance against expected benchmarks."
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Implement BMSSP Recursive Procedure",
+        "description": "Develop the main recursive divide-and-conquer algorithm for the BMSSP procedure.",
+        "details": "Manage recursion levels and handle boundary conditions. Integrate with the specialized data structure for efficient frontier management.",
+        "testStrategy": "Test with large graphs to ensure recursion correctness and performance.",
+        "priority": "high",
+        "dependencies": [
+          6,
+          7
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Initialize Recursive Framework",
+            "description": "Set up the initial framework for the recursive BMSSP procedure, including base cases and recursion termination conditions.",
+            "dependencies": [],
+            "details": "Begin by defining the base cases for the recursion, such as when the graph is reduced to a trivial size or when a predefined recursion depth is reached. Ensure that these conditions are clearly documented and implemented to prevent infinite recursion.",
+            "status": "pending",
+            "testStrategy": "Test with trivial graphs to ensure that the base cases are correctly identified and handled."
+          },
+          {
+            "id": 2,
+            "title": "Implement Divide Step",
+            "description": "Develop the logic to divide the problem into smaller subproblems, preparing the data for recursive processing.",
+            "dependencies": [
+              "8.1"
+            ],
+            "details": "Implement the divide step by partitioning the graph or problem space into smaller, manageable subproblems. Ensure that the division logic is efficient and maintains the properties required for the BMSSP procedure.",
+            "status": "pending",
+            "testStrategy": "Test with medium-sized graphs to ensure that the division correctly partitions the graph without losing essential information."
+          },
+          {
+            "id": 3,
+            "title": "Integrate Specialized Data Structure",
+            "description": "Incorporate the specialized data structure for efficient frontier management within the recursive procedure.",
+            "dependencies": [
+              "8.2"
+            ],
+            "details": "Integrate the specialized data structure designed for managing the efficient frontier. Ensure that the data structure is correctly initialized and updated at each recursion level.",
+            "status": "pending",
+            "testStrategy": "Test with various graph configurations to ensure that the data structure is correctly managing the frontier and updating as expected."
+          },
+          {
+            "id": 4,
+            "title": "Implement Conquer Step",
+            "description": "Develop the logic to combine the results of subproblems to form a solution to the original problem.",
+            "dependencies": [
+              "8.3"
+            ],
+            "details": "Implement the conquer step by merging the solutions of the subproblems. Ensure that the merging process is efficient and correctly integrates the results from each recursive call.",
+            "status": "pending",
+            "testStrategy": "Test with graphs that have known solutions to verify that the merging process produces correct and optimal results."
+          },
+          {
+            "id": 5,
+            "title": "Optimize Recursion and Boundary Conditions",
+            "description": "Refine the recursive procedure to optimize performance and handle edge cases effectively.",
+            "dependencies": [
+              "8.4"
+            ],
+            "details": "Review and optimize the recursion logic to improve performance, focusing on reducing unnecessary computations and handling edge cases. Ensure that boundary conditions are robust and prevent errors during execution.",
+            "status": "pending",
+            "testStrategy": "Conduct performance testing with large graphs to ensure that the recursion is optimized and handles all edge cases correctly."
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "Design Core API Function",
+        "description": "Design the core API function to solve the SSSP problem and return results.",
+        "details": "Implement the function to return shortest distances and predecessor maps. Handle invalid inputs gracefully.",
+        "testStrategy": "Test API with various graph inputs to ensure correct results and error handling.",
+        "priority": "high",
+        "dependencies": [
+          8
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Define API Function Signature",
+            "description": "Define the function signature for the core API function to solve the SSSP problem.",
+            "dependencies": [],
+            "details": "Determine the input parameters, such as the graph representation and source vertex, and the return types, including shortest distances and predecessor maps. Ensure the function signature is clear and aligns with project standards.",
+            "status": "pending",
+            "testStrategy": "Review the function signature with team members to ensure it meets project requirements and is easily understandable."
+          },
+          {
+            "id": 2,
+            "title": "Implement Shortest Path Algorithm",
+            "description": "Implement the algorithm to compute shortest paths from the source vertex to all other vertices in the graph.",
+            "dependencies": [
+              "9.1"
+            ],
+            "details": "Choose an appropriate algorithm, such as Dijkstra's or Bellman-Ford, based on the graph's properties. Implement the algorithm to calculate shortest distances and populate the predecessor map.",
+            "status": "pending",
+            "testStrategy": "Test the algorithm with small, known graphs to verify correctness of shortest distances and predecessor maps."
+          },
+          {
+            "id": 3,
+            "title": "Handle Invalid Inputs",
+            "description": "Implement input validation to handle invalid or malformed inputs gracefully.",
+            "dependencies": [
+              "9.1"
+            ],
+            "details": "Add checks for common input errors, such as null or malformed graphs, invalid source vertices, and ensure the function returns appropriate error messages or codes.",
+            "status": "pending",
+            "testStrategy": "Test with various invalid inputs to ensure the function handles them without crashing and provides meaningful error messages."
+          },
+          {
+            "id": 4,
+            "title": "Integrate Predecessor Map Construction",
+            "description": "Ensure the predecessor map is correctly constructed during the shortest path computation.",
+            "dependencies": [
+              "9.2"
+            ],
+            "details": "Modify the algorithm implementation to maintain a map of predecessors for each vertex, which will be used for path reconstruction.",
+            "status": "pending",
+            "testStrategy": "Verify the predecessor map by reconstructing paths from the source to various vertices and comparing them with expected paths."
+          },
+          {
+            "id": 5,
+            "title": "Optimize and Document API Function",
+            "description": "Optimize the implementation for performance and document the API function for future reference.",
+            "dependencies": [
+              "9.2",
+              "9.3",
+              "9.4"
+            ],
+            "details": "Review the implementation for performance bottlenecks and optimize as necessary. Write comprehensive documentation covering the function's purpose, usage, parameters, return values, and examples.",
+            "status": "pending",
+            "testStrategy": "Conduct performance tests with large graphs to ensure the function executes efficiently. Review documentation for clarity and completeness."
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "Implement Path Reconstruction Utilities",
+        "description": "Develop utilities to reconstruct paths from the predecessor map returned by the core API.",
+        "details": "Implement functions to trace back paths from the predecessor map. Ensure efficient path reconstruction.",
+        "testStrategy": "Test path reconstruction with various graph scenarios to ensure correctness.",
+        "priority": "medium",
+        "dependencies": [
+          9
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Design Path Reconstruction Algorithm",
+            "description": "Design an algorithm to reconstruct paths from the predecessor map.",
+            "dependencies": [],
+            "details": "Analyze the structure of the predecessor map returned by the core API. Design an algorithm that efficiently traces back from a target node to the source node using this map. Ensure the algorithm handles edge cases such as disconnected nodes or cycles.",
+            "status": "pending",
+            "testStrategy": "Review the algorithm design with edge cases and theoretical scenarios to ensure it covers all possible graph structures."
+          },
+          {
+            "id": 2,
+            "title": "Implement Path Tracing Function",
+            "description": "Implement the function to trace back paths using the designed algorithm.",
+            "dependencies": [
+              "10.1"
+            ],
+            "details": "Translate the designed algorithm into a function in the chosen programming language. The function should accept a target node and the predecessor map as inputs and return the reconstructed path as a list of nodes.",
+            "status": "pending",
+            "testStrategy": "Write unit tests for the function using small, manually verified graphs to ensure the function returns correct paths."
+          },
+          {
+            "id": 3,
+            "title": "Optimize Path Reconstruction for Efficiency",
+            "description": "Optimize the path reconstruction function to ensure it operates efficiently on large graphs.",
+            "dependencies": [
+              "10.2"
+            ],
+            "details": "Profile the initial implementation to identify bottlenecks. Apply optimizations such as reducing unnecessary data structures or operations. Ensure the function maintains a time complexity that scales well with graph size.",
+            "status": "pending",
+            "testStrategy": "Benchmark the optimized function on large synthetic graphs to verify performance improvements."
+          },
+          {
+            "id": 4,
+            "title": "Handle Special Cases in Path Reconstruction",
+            "description": "Enhance the path reconstruction function to handle special cases like cycles and disconnected components.",
+            "dependencies": [
+              "10.3"
+            ],
+            "details": "Modify the function to detect and appropriately handle cycles by checking for repeated nodes during path tracing. Implement logic to return a specific result (e.g., an empty path or error) for nodes that are not reachable from the source.",
+            "status": "pending",
+            "testStrategy": "Test the function with graphs containing cycles and disconnected components to ensure correct handling of these cases."
+          },
+          {
+            "id": 5,
+            "title": "Integrate Path Reconstruction Utilities with Core API",
+            "description": "Integrate the path reconstruction utilities into the core API for seamless usage.",
+            "dependencies": [
+              "10.4"
+            ],
+            "details": "Modify the core API to include the path reconstruction utilities as part of its functionality. Ensure that the API documentation is updated to reflect the new utilities and provide examples of usage.",
+            "status": "pending",
+            "testStrategy": "Perform integration testing by using the core API to reconstruct paths in various graph scenarios, ensuring that the utilities work as expected within the API context."
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "title": "Develop Graph Transformation Utilities",
+        "description": "Create utilities for graph transformations required by the algorithm.",
+        "details": "Implement functions for graph transformations including constant-degree transformation and zero-weight cycle substitution.",
+        "testStrategy": "Test transformations with various graph inputs to ensure correctness and efficiency.",
+        "priority": "medium",
+        "dependencies": [
+          3
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Design Graph Transformation Interface",
+            "description": "Define the interface for graph transformation utilities, including method signatures for constant-degree transformation and zero-weight cycle substitution.",
+            "dependencies": [],
+            "details": "Create an interface that outlines the required methods for graph transformations. This should include methods for transforming graphs to constant-degree and substituting zero-weight cycles. Ensure the interface is flexible enough to accommodate future transformations.",
+            "status": "pending",
+            "testStrategy": "Review the interface design with the team to ensure it meets all requirements and is extensible."
+          },
+          {
+            "id": 2,
+            "title": "Implement Constant-Degree Transformation",
+            "description": "Develop the function to transform a graph into a constant-degree graph.",
+            "dependencies": [
+              "11.1"
+            ],
+            "details": "Implement the function that takes a graph as input and outputs a transformed graph where each node has a constant degree. Use techniques such as node splitting or edge duplication to achieve this transformation.",
+            "status": "pending",
+            "testStrategy": "Test with graphs of varying sizes and degrees to ensure the transformation maintains graph properties and achieves constant degree."
+          },
+          {
+            "id": 3,
+            "title": "Implement Zero-Weight Cycle Substitution",
+            "description": "Develop the function to substitute zero-weight cycles in a graph.",
+            "dependencies": [
+              "11.1"
+            ],
+            "details": "Create a function that identifies zero-weight cycles in a graph and substitutes them with equivalent structures that maintain the graph's properties. Ensure the substitution does not introduce new cycles or alter the graph's weight properties.",
+            "status": "pending",
+            "testStrategy": "Use graphs with known zero-weight cycles to verify that the substitution is correctly applied and the graph's properties are preserved."
+          },
+          {
+            "id": 4,
+            "title": "Integrate Transformation Utilities",
+            "description": "Integrate the constant-degree transformation and zero-weight cycle substitution functions into a cohesive utility module.",
+            "dependencies": [
+              "11.2",
+              "11.3"
+            ],
+            "details": "Combine the implemented functions into a single module that provides a unified interface for graph transformations. Ensure that the module is well-documented and easy to use.",
+            "status": "pending",
+            "testStrategy": "Perform integration tests by applying both transformations to complex graphs and verifying the output against expected results."
+          },
+          {
+            "id": 5,
+            "title": "Optimize and Document Graph Transformation Utilities",
+            "description": "Optimize the performance of the graph transformation utilities and create comprehensive documentation.",
+            "dependencies": [
+              "11.4"
+            ],
+            "details": "Review the implementation for performance bottlenecks and optimize the code where necessary. Document the usage of each utility function, including examples and edge cases.",
+            "status": "pending",
+            "testStrategy": "Conduct performance tests to ensure optimizations are effective. Review documentation for clarity and completeness."
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "title": "Implement Distance Query Interfaces",
+        "description": "Develop interfaces to query distances from the source to any vertex efficiently.",
+        "details": "Implement methods to retrieve precomputed distances and handle queries efficiently.",
+        "testStrategy": "Test querying with large graphs to ensure quick and correct responses.",
+        "priority": "medium",
+        "dependencies": [
+          9
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Design Distance Query Interface",
+            "description": "Create a design for the distance query interface that outlines the methods and their expected inputs and outputs.",
+            "dependencies": [],
+            "details": "Draft a design document that specifies the interface methods for querying distances. Include method signatures, expected parameters, and return types. Consider edge cases and error handling in the design.",
+            "status": "pending",
+            "testStrategy": "Review the design with peers to ensure it meets requirements and covers all necessary use cases."
+          },
+          {
+            "id": 2,
+            "title": "Implement Distance Retrieval Method",
+            "description": "Develop the method to retrieve precomputed distances from the source to any vertex.",
+            "dependencies": [
+              "12.1"
+            ],
+            "details": "Implement a method within the interface that accesses precomputed distance data. Ensure the method efficiently retrieves the distance for a given vertex ID. Optimize for quick access using appropriate data structures.",
+            "status": "pending",
+            "testStrategy": "Test the method with a variety of vertex IDs to ensure it returns correct distances quickly."
+          },
+          {
+            "id": 3,
+            "title": "Integrate Efficient Query Handling",
+            "description": "Enhance the interface to handle distance queries efficiently, ensuring minimal latency.",
+            "dependencies": [
+              "12.2"
+            ],
+            "details": "Implement caching or indexing strategies to improve query performance. Consider using hash maps or other data structures to reduce lookup times. Ensure the system can handle concurrent queries without performance degradation.",
+            "status": "pending",
+            "testStrategy": "Conduct performance testing with large datasets to measure query response times and optimize as necessary."
+          },
+          {
+            "id": 4,
+            "title": "Implement Error Handling and Validation",
+            "description": "Add robust error handling and input validation to the distance query methods.",
+            "dependencies": [
+              "12.3"
+            ],
+            "details": "Ensure that the methods validate input parameters and handle potential errors gracefully. Implement checks for invalid vertex IDs and handle cases where distances are not precomputed. Provide meaningful error messages to the user.",
+            "status": "pending",
+            "testStrategy": "Test with invalid inputs and edge cases to ensure the system handles errors correctly and provides appropriate feedback."
+          },
+          {
+            "id": 5,
+            "title": "Document and Finalize Interface",
+            "description": "Complete the documentation for the distance query interface and prepare it for deployment.",
+            "dependencies": [
+              "12.4"
+            ],
+            "details": "Write comprehensive documentation for the interface, including usage examples, method descriptions, and performance considerations. Ensure the documentation is clear and accessible to developers and users.",
+            "status": "pending",
+            "testStrategy": "Review the documentation with team members to ensure clarity and completeness. Conduct a final review of the interface to confirm readiness for deployment."
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "title": "Add Debug and Visualization Tools",
+        "description": "Implement tools for debugging and visualizing the algorithm's execution.",
+        "details": "Develop logging mechanisms and visualization tools to track algorithm progress and identify issues.",
+        "testStrategy": "Use visualization tools to verify algorithm steps and debug any issues.",
+        "priority": "low",
+        "dependencies": [
+          8
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Design Logging Framework",
+            "description": "Create a framework for logging algorithm execution details.",
+            "dependencies": [],
+            "details": "Design a logging framework that can capture key events during the algorithm's execution. Define log levels (e.g., INFO, DEBUG, ERROR) and determine which events should trigger logs. Ensure that logs can be easily enabled or disabled and are output to a configurable destination (e.g., console, file).",
+            "status": "pending",
+            "testStrategy": "Verify that logs are correctly generated for each log level and that they can be toggled on and off."
+          },
+          {
+            "id": 2,
+            "title": "Implement Logging Mechanism",
+            "description": "Develop the logging mechanism based on the designed framework.",
+            "dependencies": [
+              "13.1"
+            ],
+            "details": "Implement the logging mechanism using a suitable library (e.g., Python's logging module). Ensure that the mechanism adheres to the designed framework, capturing all specified events and supporting the defined log levels. Implement configuration options for log output destinations.",
+            "status": "pending",
+            "testStrategy": "Test the logging mechanism by running the algorithm and checking that logs are correctly recorded according to the configuration."
+          },
+          {
+            "id": 3,
+            "title": "Design Visualization Tool",
+            "description": "Create a design for a tool to visualize algorithm execution.",
+            "dependencies": [
+              "13.1"
+            ],
+            "details": "Design a visualization tool that can represent the algorithm's progress visually. Determine the key elements to visualize (e.g., current state, decision points, path exploration). Choose a suitable visualization library or framework (e.g., D3.js, Matplotlib) and plan the user interface layout.",
+            "status": "pending",
+            "testStrategy": "Review the design with stakeholders to ensure it meets visualization requirements and is user-friendly."
+          },
+          {
+            "id": 4,
+            "title": "Develop Visualization Tool",
+            "description": "Implement the visualization tool based on the design.",
+            "dependencies": [
+              "13.3"
+            ],
+            "details": "Develop the visualization tool using the chosen library or framework. Implement features to display the algorithm's execution in real-time or as a replay. Ensure the tool can handle different algorithm states and provide interactive elements for user exploration.",
+            "status": "pending",
+            "testStrategy": "Test the visualization tool with sample algorithm runs to ensure it accurately represents the execution and is responsive to user interactions."
+          },
+          {
+            "id": 5,
+            "title": "Integrate Debug and Visualization Tools",
+            "description": "Integrate the logging and visualization tools into the algorithm's execution environment.",
+            "dependencies": [
+              "13.2",
+              "13.4"
+            ],
+            "details": "Integrate the logging and visualization tools into the existing algorithm framework. Ensure that the tools can be activated or deactivated as needed and that they work seamlessly together. Provide documentation on how to use these tools for debugging and visualization purposes.",
+            "status": "pending",
+            "testStrategy": "Conduct end-to-end tests to ensure that both tools function correctly when the algorithm is executed and that they provide useful insights for debugging and visualization."
+          }
+        ]
+      },
+      {
+        "id": 14,
+        "title": "Optimize Critical Inner Loops",
+        "description": "Profile and optimize the critical inner loops of the algorithm for performance.",
+        "details": "Use profiling tools to identify bottlenecks and optimize code for better performance.",
+        "testStrategy": "Benchmark performance before and after optimization to measure improvements.",
+        "priority": "high",
+        "dependencies": [
+          8
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Identify Critical Inner Loops",
+            "description": "Use profiling tools to identify the critical inner loops in the algorithm that are potential performance bottlenecks.",
+            "dependencies": [],
+            "details": "Utilize a profiling tool such as gprof, Valgrind, or a similar tool to analyze the algorithm's execution. Focus on identifying loops that consume the most CPU time or have the highest call frequency. Document these loops for further analysis.",
+            "status": "pending",
+            "testStrategy": "Verify that the profiling tool correctly identifies the most time-consuming loops by comparing with known benchmarks or expected results."
+          },
+          {
+            "id": 2,
+            "title": "Analyze Bottlenecks in Identified Loops",
+            "description": "Perform a detailed analysis of the identified critical loops to understand the specific causes of inefficiency.",
+            "dependencies": [
+              "14.1"
+            ],
+            "details": "Examine the code within the identified loops to determine factors contributing to inefficiency, such as unnecessary computations, poor memory access patterns, or suboptimal algorithmic complexity. Document findings for each loop.",
+            "status": "pending",
+            "testStrategy": "Ensure that the analysis correctly identifies inefficiencies by cross-referencing with theoretical performance expectations and profiling data."
+          },
+          {
+            "id": 3,
+            "title": "Implement Code Optimizations",
+            "description": "Optimize the code within the critical inner loops based on the analysis to improve performance.",
+            "dependencies": [
+              "14.2"
+            ],
+            "details": "Apply optimization techniques such as loop unrolling, strength reduction, or algorithmic improvements to address identified inefficiencies. Ensure that changes maintain the correctness of the algorithm.",
+            "status": "pending",
+            "testStrategy": "Test the optimized code for correctness and measure performance improvements using benchmarks."
+          },
+          {
+            "id": 4,
+            "title": "Refactor and Clean Up Code",
+            "description": "Refactor the optimized code to improve readability and maintainability without affecting performance.",
+            "dependencies": [
+              "14.3"
+            ],
+            "details": "Ensure that the optimized code is well-documented and follows coding standards. Refactor any complex or unclear sections to make the codebase easier to understand and maintain.",
+            "status": "pending",
+            "testStrategy": "Review the refactored code for adherence to coding standards and verify that performance remains unchanged."
+          },
+          {
+            "id": 5,
+            "title": "Benchmark and Validate Performance Improvements",
+            "description": "Benchmark the algorithm before and after optimization to quantify performance improvements.",
+            "dependencies": [
+              "14.4"
+            ],
+            "details": "Use a consistent set of test cases to measure the performance of the algorithm before and after the optimizations. Document the results and ensure that the optimizations have led to significant performance gains.",
+            "status": "pending",
+            "testStrategy": "Compare benchmark results to ensure that the optimized version of the algorithm performs better than the original. Validate that the results are consistent across different test cases."
+          }
+        ]
+      },
+      {
+        "id": 15,
+        "title": "Implement Comprehensive Test Suite",
+        "description": "Develop a comprehensive test suite covering all components and edge cases.",
+        "details": "Create unit, integration, and performance tests to ensure correctness and efficiency across all components.",
+        "testStrategy": "Run the test suite to validate all components and ensure no regressions.",
+        "priority": "high",
+        "dependencies": [
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Develop Unit Tests for Core Components",
+            "description": "Create unit tests for each core component to ensure individual functionality is correct.",
+            "dependencies": [],
+            "details": "Identify all core components of the system. For each component, write unit tests that cover all possible input scenarios, including edge cases. Use a testing framework like JUnit or pytest to automate the execution of these tests.",
+            "status": "pending",
+            "testStrategy": "Run the unit tests and ensure all tests pass without errors. Verify that edge cases are handled correctly."
+          },
+          {
+            "id": 2,
+            "title": "Implement Integration Tests for Component Interactions",
+            "description": "Develop integration tests to verify that components interact correctly with each other.",
+            "dependencies": [
+              "15.1"
+            ],
+            "details": "Identify key interactions between components. Write integration tests that simulate these interactions and verify the expected outcomes. Use a testing framework that supports integration testing, such as TestNG or Mocha.",
+            "status": "pending",
+            "testStrategy": "Execute the integration tests and confirm that all interactions produce the expected results without errors."
+          },
+          {
+            "id": 3,
+            "title": "Create Performance Tests for System Efficiency",
+            "description": "Design performance tests to assess the efficiency of the system under various conditions.",
+            "dependencies": [
+              "15.2"
+            ],
+            "details": "Define performance metrics such as response time and throughput. Develop test scenarios that simulate different load conditions. Use tools like JMeter or Gatling to automate performance testing and collect data on system performance.",
+            "status": "pending",
+            "testStrategy": "Analyze performance test results to identify any bottlenecks or inefficiencies. Ensure the system meets the defined performance criteria."
+          },
+          {
+            "id": 4,
+            "title": "Develop Edge Case Tests for Comprehensive Coverage",
+            "description": "Identify and test edge cases to ensure the system handles unusual or extreme conditions correctly.",
+            "dependencies": [
+              "15.1",
+              "15.2"
+            ],
+            "details": "Review the system requirements and design to identify potential edge cases. Write tests specifically targeting these scenarios. Ensure that edge cases are included in both unit and integration tests.",
+            "status": "pending",
+            "testStrategy": "Run edge case tests and verify that the system behaves as expected in all scenarios. Ensure no unexpected errors occur."
+          },
+          {
+            "id": 5,
+            "title": "Automate Test Suite Execution and Reporting",
+            "description": "Set up automation for running the entire test suite and generating reports on test outcomes.",
+            "dependencies": [
+              "15.1",
+              "15.2",
+              "15.3",
+              "15.4"
+            ],
+            "details": "Use a continuous integration tool like Jenkins or Travis CI to automate the execution of the test suite. Configure the tool to run tests on code changes and generate reports summarizing test results. Ensure that test failures are reported promptly to the development team.",
+            "status": "pending",
+            "testStrategy": "Verify that the test suite runs automatically on code changes and that reports are generated correctly. Ensure that any test failures are highlighted and communicated effectively."
+          }
+        ]
+      },
+      {
+        "id": 16,
+        "title": "Profile and Tune Performance",
+        "description": "Profile the entire library and tune for optimal performance.",
+        "details": "Use profiling tools to analyze performance and make necessary adjustments to achieve target time complexity.",
+        "testStrategy": "Compare performance metrics against benchmarks to ensure targets are met.",
+        "priority": "high",
+        "dependencies": [
+          14,
+          15
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Identify Performance Bottlenecks",
+            "description": "Use profiling tools to identify the main performance bottlenecks in the library.",
+            "dependencies": [],
+            "details": "Utilize profiling tools such as gprof, Valgrind, or perf to analyze the library's performance. Focus on identifying functions or sections of code that consume the most CPU time or have high memory usage. Document these bottlenecks for further analysis.",
+            "status": "pending",
+            "testStrategy": "Verify that the profiling tools are correctly identifying the bottlenecks by cross-referencing with known performance issues."
+          },
+          {
+            "id": 2,
+            "title": "Analyze and Prioritize Bottlenecks",
+            "description": "Analyze the identified bottlenecks and prioritize them based on their impact on performance.",
+            "dependencies": [
+              "16.1"
+            ],
+            "details": "Review the profiling data to understand the root causes of the bottlenecks. Prioritize them based on their impact on overall performance and the feasibility of optimization. Create a list of prioritized bottlenecks to address.",
+            "status": "pending",
+            "testStrategy": "Ensure that the prioritization aligns with performance goals and that the most impactful bottlenecks are addressed first."
+          },
+          {
+            "id": 3,
+            "title": "Optimize Critical Code Sections",
+            "description": "Implement optimizations for the highest priority bottlenecks identified in the analysis.",
+            "dependencies": [
+              "16.2"
+            ],
+            "details": "Refactor or rewrite code sections to improve performance. This may include algorithmic improvements, reducing complexity, or optimizing memory usage. Ensure that changes do not affect the correctness of the library.",
+            "status": "pending",
+            "testStrategy": "Benchmark the optimized code sections to measure performance improvements and verify that functionality remains correct."
+          },
+          {
+            "id": 4,
+            "title": "Validate Performance Improvements",
+            "description": "Validate the performance improvements by comparing against baseline metrics.",
+            "dependencies": [
+              "16.3"
+            ],
+            "details": "Run the library with the optimized code and compare the performance metrics against the baseline established before optimization. Ensure that the improvements meet or exceed the target performance goals.",
+            "status": "pending",
+            "testStrategy": "Use automated tests to compare execution time, memory usage, and other relevant metrics before and after optimization."
+          },
+          {
+            "id": 5,
+            "title": "Document Performance Tuning Process",
+            "description": "Document the entire performance tuning process, including tools used, bottlenecks identified, optimizations made, and results achieved.",
+            "dependencies": [
+              "16.4"
+            ],
+            "details": "Create comprehensive documentation that outlines the profiling and tuning process. Include details on the tools and methods used, the specific changes made to the code, and the performance improvements achieved. This documentation will serve as a reference for future performance tuning efforts.",
+            "status": "pending",
+            "testStrategy": "Review the documentation for completeness and accuracy, ensuring it provides a clear understanding of the performance tuning process."
+          }
+        ]
+      },
+      {
+        "id": 17,
+        "title": "Create Documentation and Examples",
+        "description": "Develop comprehensive documentation and usage examples for the library.",
+        "details": "Document all public APIs, provide usage examples, and explain theoretical foundations. Include build instructions and optimization tips.",
+        "testStrategy": "Review documentation for completeness and clarity. Ensure examples are correct and useful.",
+        "priority": "medium",
+        "dependencies": [
+          9,
+          10,
+          11,
+          12
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Document Public APIs",
+            "description": "Create detailed documentation for all public APIs of the library.",
+            "dependencies": [],
+            "details": "Review the library's codebase to identify all public APIs. For each API, document its purpose, input parameters, return values, and any exceptions it might throw. Use a consistent format for all API documentation entries. Consider using tools like Doxygen or JSDoc to generate structured documentation from comments in the code.",
+            "status": "pending",
+            "testStrategy": "Review the documentation for completeness and accuracy by comparing it against the actual code implementation. Ensure that all public APIs are covered."
+          },
+          {
+            "id": 2,
+            "title": "Develop Usage Examples",
+            "description": "Create practical usage examples demonstrating how to use the library's APIs.",
+            "dependencies": [
+              "17.1"
+            ],
+            "details": "Identify common use cases for the library and develop code examples that demonstrate these scenarios. Ensure examples are clear, concise, and cover a range of functionalities. Include comments in the examples to explain each step. Place the examples in a dedicated section of the documentation or in a separate examples directory.",
+            "status": "pending",
+            "testStrategy": "Run each example to ensure it executes correctly and produces the expected results. Verify that the examples are easy to understand and follow."
+          },
+          {
+            "id": 3,
+            "title": "Explain Theoretical Foundations",
+            "description": "Provide an explanation of the theoretical foundations underlying the library's functionality.",
+            "dependencies": [
+              "17.1"
+            ],
+            "details": "Research and compile information on the algorithms and data structures used in the library. Write a section in the documentation that explains these concepts in a way that is accessible to users with varying levels of expertise. Include references to academic papers or other resources where appropriate.",
+            "status": "pending",
+            "testStrategy": "Have a peer review the theoretical explanations for clarity and accuracy. Ensure that the explanations are comprehensive and understandable."
+          },
+          {
+            "id": 4,
+            "title": "Include Build Instructions",
+            "description": "Provide detailed instructions on how to build the library from source.",
+            "dependencies": [],
+            "details": "Write a step-by-step guide on building the library, including prerequisites, configuration options, and build commands. Ensure the instructions are platform-independent or provide separate instructions for different platforms. Include troubleshooting tips for common build issues.",
+            "status": "pending",
+            "testStrategy": "Follow the build instructions on a clean system to ensure they are accurate and complete. Verify that the library builds successfully without errors."
+          },
+          {
+            "id": 5,
+            "title": "Add Optimization Tips",
+            "description": "Provide tips on optimizing the library's performance.",
+            "dependencies": [
+              "17.1"
+            ],
+            "details": "Identify potential performance bottlenecks in the library and suggest ways to optimize them. Include tips on configuring the library for different use cases, such as high-performance environments. Document any compiler flags or settings that can improve performance.",
+            "status": "pending",
+            "testStrategy": "Test the library's performance with and without the optimization tips to measure their impact. Ensure that the tips are practical and lead to noticeable improvements."
+          }
+        ]
+      },
+      {
+        "id": 18,
+        "title": "Package for Distribution",
+        "description": "Prepare the library for distribution across multiple platforms.",
+        "details": "Set up packaging scripts for Linux, macOS, and Windows. Ensure all dependencies are included and the library is easy to install.",
+        "testStrategy": "Test installation on all supported platforms to ensure smooth setup.",
+        "priority": "medium",
+        "dependencies": [
+          17
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Set Up Packaging Script for Linux",
+            "description": "Create a packaging script to bundle the library for Linux distribution.",
+            "dependencies": [],
+            "details": "Develop a shell script or use a tool like Make or CMake to automate the packaging process. Ensure that all necessary dependencies are included and that the library can be easily installed using package managers like apt or yum.",
+            "status": "pending",
+            "testStrategy": "Test the installation process on a clean Linux environment to ensure all dependencies are correctly resolved and the library installs without issues."
+          },
+          {
+            "id": 2,
+            "title": "Set Up Packaging Script for macOS",
+            "description": "Create a packaging script to bundle the library for macOS distribution.",
+            "dependencies": [
+              "18.1"
+            ],
+            "details": "Use a tool like Homebrew or a shell script to package the library for macOS. Ensure that all dependencies are included and that the library can be installed using Homebrew or other package managers.",
+            "status": "pending",
+            "testStrategy": "Test the installation process on a clean macOS environment to ensure all dependencies are correctly resolved and the library installs without issues."
+          },
+          {
+            "id": 3,
+            "title": "Set Up Packaging Script for Windows",
+            "description": "Create a packaging script to bundle the library for Windows distribution.",
+            "dependencies": [
+              "18.2"
+            ],
+            "details": "Use a tool like NSIS or Inno Setup to create an installer for Windows. Ensure that all necessary dependencies are included and that the library can be installed easily on Windows systems.",
+            "status": "pending",
+            "testStrategy": "Test the installation process on a clean Windows environment to ensure all dependencies are correctly resolved and the library installs without issues."
+          },
+          {
+            "id": 4,
+            "title": "Ensure Cross-Platform Dependency Management",
+            "description": "Verify that all dependencies are correctly managed and included in the packaging scripts for all platforms.",
+            "dependencies": [
+              "18.1",
+              "18.2",
+              "18.3"
+            ],
+            "details": "Review the dependency management for each platform to ensure consistency. Use tools like pip for Python dependencies or npm for Node.js to ensure all dependencies are included in the package.",
+            "status": "pending",
+            "testStrategy": "Run dependency checks on each platform to ensure no missing dependencies and that the library functions as expected after installation."
+          },
+          {
+            "id": 5,
+            "title": "Create Installation Documentation",
+            "description": "Develop comprehensive installation documentation for users on all supported platforms.",
+            "dependencies": [
+              "18.4"
+            ],
+            "details": "Write detailed installation instructions for Linux, macOS, and Windows. Include troubleshooting tips and common issues. Ensure the documentation is clear and easy to follow.",
+            "status": "pending",
+            "testStrategy": "Have a third party follow the documentation to install the library on each platform and provide feedback on clarity and completeness."
+          }
+        ]
+      },
+      {
+        "id": 19,
+        "title": "Implement Tie-Breaking Mechanism",
+        "description": "Establish a tie-breaking mechanism for paths with equal lengths using lexicographic comparison.",
+        "details": "Implement a comparison function for path tuples to ensure consistent tie-breaking in O(1) time.",
+        "testStrategy": "Test tie-breaking with graphs having multiple shortest paths to ensure consistency.",
+        "priority": "medium",
+        "dependencies": [
+          9
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Define Path Tuple Structure",
+            "description": "Define the structure for path tuples to be used in the tie-breaking mechanism.",
+            "dependencies": [],
+            "details": "Create a data structure that represents paths as tuples. Ensure that each tuple contains all necessary elements for comparison, such as path nodes and their order.",
+            "status": "pending",
+            "testStrategy": "Verify that the tuple structure correctly represents different paths and can be instantiated without errors."
+          },
+          {
+            "id": 2,
+            "title": "Implement Lexicographic Comparison Function",
+            "description": "Develop a function to compare two path tuples lexicographically.",
+            "dependencies": [
+              "19.1"
+            ],
+            "details": "Implement a function that takes two path tuples as input and returns -1, 0, or 1 based on their lexicographic order. Ensure the function operates in O(1) time by leveraging tuple properties.",
+            "status": "pending",
+            "testStrategy": "Test the function with various path tuples to ensure correct lexicographic ordering."
+          },
+          {
+            "id": 3,
+            "title": "Integrate Comparison Function into Path Selection",
+            "description": "Integrate the lexicographic comparison function into the path selection process to handle ties.",
+            "dependencies": [
+              "19.2"
+            ],
+            "details": "Modify the path selection logic to use the comparison function when paths of equal length are encountered. Ensure that the selection process remains efficient.",
+            "status": "pending",
+            "testStrategy": "Test the integration by simulating scenarios with multiple shortest paths and verifying the correct path is selected."
+          },
+          {
+            "id": 4,
+            "title": "Optimize Comparison Function for Performance",
+            "description": "Optimize the lexicographic comparison function to ensure it consistently operates in O(1) time.",
+            "dependencies": [
+              "19.3"
+            ],
+            "details": "Review the implementation of the comparison function and apply any necessary optimizations to maintain O(1) time complexity. Consider caching or pre-computation strategies if applicable.",
+            "status": "pending",
+            "testStrategy": "Benchmark the optimized function to confirm it meets the O(1) time complexity requirement."
+          },
+          {
+            "id": 5,
+            "title": "Validate Tie-Breaking Mechanism with Test Cases",
+            "description": "Develop and execute test cases to validate the tie-breaking mechanism in various graph scenarios.",
+            "dependencies": [
+              "19.4"
+            ],
+            "details": "Create test cases that include graphs with multiple shortest paths. Ensure the tie-breaking mechanism consistently selects the correct path according to lexicographic order.",
+            "status": "pending",
+            "testStrategy": "Run the test cases and verify that the results match expected outcomes, ensuring the mechanism's correctness and reliability."
+          }
+        ]
+      },
+      {
+        "id": 20,
+        "title": "Finalize and Release Version 1.0",
+        "description": "Complete final checks and release version 1.0 of the library.",
+        "details": "Ensure all tasks are completed, perform final testing, and update versioning. Announce the release and update repository with final changes.",
+        "testStrategy": "Perform a final review and testing to ensure all requirements are met and the library is stable.",
+        "priority": "high",
+        "dependencies": [
+          18,
+          19
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Conduct Final Code Review",
+            "description": "Perform a thorough review of the entire codebase to ensure all tasks are completed and code quality standards are met.",
+            "dependencies": [],
+            "details": "Review the code for any incomplete features, unresolved bugs, or code that does not adhere to the project's coding standards. Ensure all previous tasks, especially those with high priority, are fully integrated and functioning as expected.",
+            "status": "pending",
+            "testStrategy": "Verify that all code changes have been reviewed and approved by at least one other developer."
+          },
+          {
+            "id": 2,
+            "title": "Perform Final Testing",
+            "description": "Execute the comprehensive test suite to validate the library's functionality and stability.",
+            "dependencies": [
+              "20.1"
+            ],
+            "details": "Run all unit, integration, and performance tests developed in Task 15. Ensure that all tests pass without any failures and that the library behaves as expected under various scenarios.",
+            "status": "pending",
+            "testStrategy": "Ensure 100% pass rate on the test suite and manually test any edge cases not covered by automated tests."
+          },
+          {
+            "id": 3,
+            "title": "Update Versioning and Documentation",
+            "description": "Update the library's version number to 1.0 and ensure all documentation reflects the latest changes.",
+            "dependencies": [
+              "20.2"
+            ],
+            "details": "Modify the versioning file to reflect version 1.0. Update README, CHANGELOG, and any other relevant documentation to include new features, bug fixes, and usage instructions.",
+            "status": "pending",
+            "testStrategy": "Check that all documentation is up-to-date and accurately describes the current state of the library."
+          },
+          {
+            "id": 4,
+            "title": "Announce the Release",
+            "description": "Prepare and distribute an announcement for the release of version 1.0.",
+            "dependencies": [
+              "20.3"
+            ],
+            "details": "Draft a release announcement highlighting key features and improvements. Distribute the announcement via appropriate channels such as the project's website, mailing list, and social media.",
+            "status": "pending",
+            "testStrategy": "Ensure the announcement reaches the intended audience and gather initial feedback."
+          },
+          {
+            "id": 5,
+            "title": "Update Repository with Final Changes",
+            "description": "Push all final changes to the main repository and tag the release.",
+            "dependencies": [
+              "20.4"
+            ],
+            "details": "Commit any remaining changes to the main branch. Tag the release with version 1.0 and ensure all changes are reflected in the remote repository. Verify that the repository is in a stable state.",
+            "status": "pending",
+            "testStrategy": "Confirm that the repository is accessible, the tag is correctly applied, and all changes are present and correct."
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "created": "2025-08-07T01:58:00.513Z",
+      "updated": "2025-08-07T02:59:21.383Z",
+      "description": "Tasks for master context"
+    }
+  }
+}
