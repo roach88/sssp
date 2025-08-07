@@ -4,6 +4,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <limits>
+#include <vector>
 
 namespace sssp {
 
@@ -58,6 +59,18 @@ inline std::size_t compute_t(std::size_t n) {
     }
     return t > 0 ? t : 1;
 }
+
+
+struct DistState {
+    std::vector<Weight> dist;
+    std::vector<VertexId> pred;
+    void init(std::size_t n){ dist.assign(n, INFINITE_WEIGHT); pred.assign(n, INVALID_VERTEX); }
+    Weight get(VertexId id) const { return dist[id]; }
+    void set(VertexId id, Weight w){ dist[id]=w; }
+    bool has_pred(VertexId id) const { return pred[id] != INVALID_VERTEX; }
+    VertexId get_pred(VertexId id) const { return pred[id]; }
+    void set_pred(VertexId id, VertexId p){ pred[id]=p; }
+};
 
 } // namespace sssp
 

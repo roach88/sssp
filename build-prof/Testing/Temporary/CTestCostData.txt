@@ -1,0 +1,6 @@
+test_paths 2 0.0712804
+test_distance_queries 2 0.0499038
+test_tie_break 2 0.0495941
+test_base_case 2 0.0506267
+test_bmssp 2 0.0511616
+---

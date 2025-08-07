@@ -229,7 +229,7 @@ public:
         }
         
         // Create sorted list of unique pairs
-        std::vector<KeyValuePair> sorted_pairs;
+        std::vector<KeyValuePair> sorted_pairs; sorted_pairs.reserve(pairs.size());
         for (const auto& [key, value] : min_per_key) {
             // Only add if this is a new minimum for the key
             if (update_key_tracking(key, value)) {
@@ -291,6 +291,7 @@ public:
      */
     std::pair<std::vector<KeyValuePair>, Value> Pull() {
         std::vector<KeyValuePair> result;
+        result.reserve(M_);
         Value boundary = B_;
         
         if (empty()) {
@@ -298,8 +299,8 @@ public:
         }
         
         // Track blocks to remove after pulling
-        std::vector<typename std::list<BlockPtr>::iterator> d0_to_remove;
-        std::vector<typename std::list<BlockPtr>::iterator> d1_to_remove;
+        std::vector<typename std::list<BlockPtr>::iterator> d0_to_remove; d0_to_remove.reserve(8);
+        std::vector<typename std::list<BlockPtr>::iterator> d1_to_remove; d1_to_remove.reserve(8);
         
         // First, collect from D0 blocks
         for (auto d0_it = D0_.begin(); d0_it != D0_.end() && result.size() < M_; ++d0_it) {
@@ -310,12 +311,9 @@ public:
             for (std::size_t i = 0; i < to_take; ++i, ++elem_it) {
                 result.push_back(*elem_it);
             }
-            
             if (to_take == block->elements.size()) {
-                // Entire block consumed
                 d0_to_remove.push_back(d0_it);
             } else {
-                // Partial consumption - remove pulled elements
                 block->elements.erase(block->elements.begin(), elem_it);
                 if (result.size() >= M_) {
                     boundary = block->min_value();
@@ -339,12 +337,9 @@ public:
                 for (std::size_t i = 0; i < to_take; ++i, ++elem_it) {
                     result.push_back(*elem_it);
                 }
-                
                 if (to_take == block->elements.size()) {
-                    // Entire block consumed
                     d1_to_remove.push_back(d1_it);
                 } else {
-                    // Partial consumption - remove pulled elements
                     block->elements.erase(block->elements.begin(), elem_it);
                     if (result.size() >= M_) {
                         boundary = block->min_value();
@@ -447,16 +442,8 @@ public:
             block->elements.erase(old_it);
             total_elements_--;
         }
-        
-        // Find insertion position to maintain sorted order by value
-        auto insert_pos = std::lower_bound(block->elements.begin(), 
-                                            block->elements.end(),
-                                            value,
-                                            [](const KeyValuePair& kv, Value v) {
-                                                return kv.second < v;
-                                            });
-        
-        // Insert the new pair
+        auto insert_pos = std::lower_bound(block->elements.begin(), block->elements.end(), value,
+                                           [](const KeyValuePair& kv, Value v){ return kv.second < v; });
         block->elements.insert(insert_pos, std::make_pair(key, value));
         total_elements_++;
         
@@ -485,16 +472,10 @@ private:
         std::size_t mid = block->size() / 2;
         auto mid_it = block->elements.begin();
         std::advance(mid_it, mid);
-        
-        // Create new block for second half
         auto new_block = std::make_shared<Block>();
         new_block->upper_bound = block->upper_bound;
-        
-        // Move second half to new block
-        new_block->elements.splice(new_block->elements.begin(),
-                                    block->elements,
-                                    mid_it,
-                                    block->elements.end());
+        new_block->elements.splice(new_block->elements.begin(), block->elements,
+                                    mid_it, block->elements.end());
         
         // Update upper bound of first block
         Value old_upper = block->upper_bound;

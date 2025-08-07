@@ -11,7 +11,7 @@ This library implements a novel SSSP algorithm that breaks the traditional Θ(n 
 - **O(m log^(2/3) n) Time Complexity**: Deterministic algorithm with proven theoretical bounds
 - **Advanced Data Structures**: Specialized block-based linked list for efficient frontier management
 - **Graph Transformation**: Automatic constant-degree transformation for arbitrary graphs
-- **Cross-Platform**: CMake-based build system supporting Linux, macOS, and Windows
+- **Profiling Built-in**: Optional timers for BaseCase, FindPivots, and BMSSP with SSSP_PROFILE
 - **Modern C++17**: Leveraging modern language features for performance and maintainability
 
 ## Algorithm Components
@@ -24,9 +24,9 @@ This library implements a novel SSSP algorithm that breaks the traditional Θ(n 
 
 ### Data Structures
 
-- **Specialized Block-Based Structure**: Adaptive linked list with O(t) insertion time
-- **Binary Heap**: Efficient support for Dijkstra-like operations
-- **Self-Balancing BST**: Dynamic management of block upper bounds
+- **Specialized Block-Based Structure (D)**: Adaptive linked-list blocks with O(t) insertion time and Pull/BatchPrepend operations
+- **Binary Heap**: Efficient support for Dijkstra-like operations in BaseCase
+- **Self-Balancing BST**: Dynamic management of block upper bounds for D1
 
 ## Requirements
 
@@ -48,10 +48,19 @@ mkdir build && cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 
 # Build the library
-make -j$(nproc)
+cmake --build . -j
 
-# Run tests (if available)
-make test
+# Run tests
+ctest --output-on-failure
+```
+
+### Profiling build
+
+```bash
+cmake -S . -B build-prof -DCMAKE_BUILD_TYPE=Release -DSSSP_PROFILE=ON -DBUILD_BENCHMARKS=ON
+cmake --build build-prof -j
+ctest --test-dir build-prof --output-on-failure
+./build-prof/bench_sssp
 ```
 
 ### Build Options
@@ -63,22 +72,30 @@ make test
 ## Usage
 
 ```cpp
-#include "sssp/sssp.hpp"
+#include "sssp/api.hpp"
+#include "sssp/path.hpp"
 
-// Create and populate your graph
-Graph graph;
+using namespace sssp;
+
+Graph G;
 // ... add vertices and edges ...
 
-// Solve SSSP from source vertex
-Vertex source = 0;
-auto [distances, predecessors] = solveSSSP(&graph, source);
+auto [dist, pred] = solveSSSP(G, Vertex(0));
 
-// Access shortest distance to any vertex
-Vertex target = 42;
-double distance = distances[target];
+auto d = get_distance(dist, Vertex(42));
+auto path = reconstruct_path(Vertex(42), pred, Vertex(0));
+```
 
-// Reconstruct shortest path
-auto path = reconstructPath(predecessors, source, target);
+If you need direct access to internal state for advanced workflows, use DistState:
+
+```cpp
+#include "sssp/types.hpp"
+#include "sssp/bmssp.hpp"
+
+DistState state; state.init(G.num_vertices());
+state.set(0, 0.0);
+std::vector<Vertex> S = {Vertex(0)};
+auto res = BMSSP::run(G, /*l*/ 2, std::numeric_limits<Weight>::infinity(), S, state, G.get_k(), G.get_t());
 ```
 
 ## API Reference
@@ -86,23 +103,24 @@ auto path = reconstructPath(predecessors, source, target);
 ### Core Functions
 
 ```cpp
-std::pair<std::map<Vertex, double>, std::map<Vertex, Vertex>>
-solveSSSP(Graph* graph, Vertex source);
+std::pair<std::unordered_map<Vertex, Weight>, std::unordered_map<Vertex, Vertex>>
+solveSSSP(const Graph& G, const Vertex& source);
+
+Weight get_distance(const std::unordered_map<Vertex, Weight>& distances, Vertex v);
+std::vector<Weight> get_distances(const std::unordered_map<Vertex, Weight>& distances, const std::vector<Vertex>& vs);
 ```
 
-Solves the Single-Source Shortest Paths problem.
+For internal workflows, DistState-based helpers are available:
 
-**Parameters:**
-- `graph`: Pointer to a directed graph with non-negative edge weights
-- `source`: Source vertex for path computation
-
-**Returns:**
-- First: Map of vertices to their shortest distances from source
-- Second: Predecessor map for path reconstruction
+```cpp
+Weight get_distance(const DistState& state, Vertex v);
+std::vector<Weight> get_distances(const DistState& state, const std::vector<Vertex>& vs);
+```
 
 ## Performance
 
 The algorithm achieves O(m log^(2/3) n) time complexity where:
+
 - m = number of edges
 - n = number of vertices
 - k = ⌊log^(1/3)(n)⌋
@@ -110,13 +128,21 @@ The algorithm achieves O(m log^(2/3) n) time complexity where:
 
 ### Benchmarks
 
-Performance comparisons with standard implementations:
+Build with profiling flags and run the included benchmark:
 
-| Graph Size | Edges | SSSP Library | Dijkstra | Speedup |
-|------------|-------|--------------|----------|---------|
-| 10K nodes  | 100K  | TBD          | TBD      | TBD     |
-| 100K nodes | 1M    | TBD          | TBD      | TBD     |
-| 1M nodes   | 10M   | TBD          | TBD      | TBD     |
+```bash
+cmake -S . -B build-prof -DCMAKE_BUILD_TYPE=Release -DSSSP_PROFILE=ON -DBUILD_BENCHMARKS=ON
+cmake --build build-prof -j
+./build-prof/bench_sssp
+```
+
+Sample output:
+
+```
+Ran 5 SSSP runs on n=1000 m=5000 in X ms
+dist[0]=0
+SSSP profile (ms): basecase=0.01 findpivots=0.02 bmssp=0.07
+```
 
 ## Development
 
@@ -152,11 +178,7 @@ This implementation is based on the theoretical work presented in "Breaking the 
 
 ## License
 
-[License information to be added]
-
 ## Authors
-
-[Author information to be added]
 
 ## References
 
