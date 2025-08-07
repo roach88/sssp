@@ -7,6 +7,7 @@
 #include <unordered_map>
 #include <vector>
 #include <utility>
+#include <cmath>
 
 namespace sssp {
 

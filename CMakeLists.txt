@@ -35,13 +35,16 @@ endif()
 # Include directories
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
-# Source files
-file(GLOB_RECURSE SOURCES ${PROJECT_SOURCE_DIR}/src/*.cpp)
+# Source files (exclude test files)
+file(GLOB_RECURSE ALL_SOURCES ${PROJECT_SOURCE_DIR}/src/*.cpp)
+list(FILTER ALL_SOURCES EXCLUDE REGEX ".*test_.*\\.cpp$")
+set(SOURCES ${ALL_SOURCES})
+
 file(GLOB_RECURSE HEADERS ${PROJECT_SOURCE_DIR}/include/*.hpp ${PROJECT_SOURCE_DIR}/include/*.h)
 
 # Create library
 add_library(sssp_lib STATIC ${SOURCES})
-target_include_directories(sssp_lib PUBLIC 
+target_include_directories(sssp_lib PUBLIC
     $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
 )
@@ -69,6 +72,16 @@ endif()
 option(BUILD_TESTS "Build tests" ON)
 if(BUILD_TESTS)
     enable_testing()
+
+    # Google Test integration
+    include(FetchContent)
+    FetchContent_Declare(
+        googletest
+        GIT_REPOSITORY https://github.com/google/googletest.git
+        GIT_TAG release-1.12.1
+    )
+    FetchContent_MakeAvailable(googletest)
+
     # Do not auto-aggregate all tests; add individually to avoid multiple mains
     # file(GLOB_RECURSE TEST_SOURCES ${PROJECT_SOURCE_DIR}/tests/*.cpp)
     # if(TEST_SOURCES)
@@ -79,71 +92,71 @@ if(BUILD_TESTS)
 
     if(EXISTS ${PROJECT_SOURCE_DIR}/tests/path_smoke.cpp)
         add_executable(test_paths ${PROJECT_SOURCE_DIR}/tests/path_smoke.cpp)
-        target_link_libraries(test_paths PRIVATE sssp_lib)
+        target_link_libraries(test_paths PRIVATE sssp_lib GTest::gtest_main)
         add_test(NAME test_paths COMMAND test_paths)
     endif()
 
     if(EXISTS ${PROJECT_SOURCE_DIR}/tests/distance_query_smoke.cpp)
         add_executable(test_distance_queries ${PROJECT_SOURCE_DIR}/tests/distance_query_smoke.cpp)
-        target_link_libraries(test_distance_queries PRIVATE sssp_lib)
+        target_link_libraries(test_distance_queries PRIVATE sssp_lib GTest::gtest_main)
         add_test(NAME test_distance_queries COMMAND test_distance_queries)
     endif()
 
     if(EXISTS ${PROJECT_SOURCE_DIR}/tests/tie_break_smoke.cpp)
         add_executable(test_tie_break ${PROJECT_SOURCE_DIR}/tests/tie_break_smoke.cpp)
-        target_link_libraries(test_tie_break PRIVATE sssp_lib)
+        target_link_libraries(test_tie_break PRIVATE sssp_lib GTest::gtest_main)
         add_test(NAME test_tie_break COMMAND test_tie_break)
     endif()
 
 
-    if(EXISTS ${PROJECT_SOURCE_DIR}/test_binary_heap.cpp)
-        add_executable(test_binary_heap ${PROJECT_SOURCE_DIR}/test_binary_heap.cpp)
-        target_link_libraries(test_binary_heap PRIVATE sssp_lib)
+    if(EXISTS ${PROJECT_SOURCE_DIR}/src/test_binary_heap.cpp)
+        add_executable(test_binary_heap ${PROJECT_SOURCE_DIR}/src/test_binary_heap.cpp)
+        target_link_libraries(test_binary_heap PRIVATE sssp_lib GTest::gtest_main)
         add_test(NAME test_binary_heap COMMAND test_binary_heap)
     endif()
 
-    if(EXISTS ${PROJECT_SOURCE_DIR}/test_block_structure.cpp)
-        add_executable(test_block_structure ${PROJECT_SOURCE_DIR}/test_block_structure.cpp)
-        target_link_libraries(test_block_structure PRIVATE sssp_lib)
+    if(EXISTS ${PROJECT_SOURCE_DIR}/src/test_block_structure.cpp)
+        add_executable(test_block_structure ${PROJECT_SOURCE_DIR}/src/test_block_structure.cpp)
+        target_link_libraries(test_block_structure PRIVATE sssp_lib GTest::gtest_main)
         add_test(NAME test_block_structure COMMAND test_block_structure)
     endif()
 
-    if(EXISTS ${PROJECT_SOURCE_DIR}/test_graph.cpp)
-        add_executable(test_graph ${PROJECT_SOURCE_DIR}/test_graph.cpp)
-        target_link_libraries(test_graph PRIVATE sssp_lib)
+    if(EXISTS ${PROJECT_SOURCE_DIR}/src/test_graph.cpp)
+        add_executable(test_graph ${PROJECT_SOURCE_DIR}/src/test_graph.cpp)
+        target_link_libraries(test_graph PRIVATE sssp_lib GTest::gtest_main)
         add_test(NAME test_graph COMMAND test_graph)
     endif()
 
-    if(EXISTS ${PROJECT_SOURCE_DIR}/test_transform.cpp)
-        add_executable(test_transform ${PROJECT_SOURCE_DIR}/test_transform.cpp)
-        target_link_libraries(test_transform PRIVATE sssp_lib)
+    if(EXISTS ${PROJECT_SOURCE_DIR}/src/test_transform.cpp)
+        add_executable(test_transform ${PROJECT_SOURCE_DIR}/src/test_transform.cpp)
+        target_link_libraries(test_transform PRIVATE sssp_lib GTest::gtest_main)
         add_test(NAME test_transform COMMAND test_transform)
     endif()
 
-    if(EXISTS ${PROJECT_SOURCE_DIR}/test_find_pivots.cpp)
-        add_executable(test_find_pivots ${PROJECT_SOURCE_DIR}/test_find_pivots.cpp)
-        target_link_libraries(test_find_pivots PRIVATE sssp_lib)
+    if(EXISTS ${PROJECT_SOURCE_DIR}/src/test_find_pivots.cpp)
+        add_executable(test_find_pivots ${PROJECT_SOURCE_DIR}/src/test_find_pivots.cpp)
+        target_link_libraries(test_find_pivots PRIVATE sssp_lib GTest::gtest_main)
         add_test(NAME test_find_pivots COMMAND test_find_pivots)
     endif()
 
-    if(EXISTS ${PROJECT_SOURCE_DIR}/test_validate_transform.cpp)
-        add_executable(test_validate_transform ${PROJECT_SOURCE_DIR}/test_validate_transform.cpp)
-        target_link_libraries(test_validate_transform PRIVATE sssp_lib)
+    if(EXISTS ${PROJECT_SOURCE_DIR}/src/test_validate_transform.cpp)
+        add_executable(test_validate_transform ${PROJECT_SOURCE_DIR}/src/test_validate_transform.cpp)
+        target_link_libraries(test_validate_transform PRIVATE sssp_lib GTest::gtest_main)
         add_test(NAME test_validate_transform COMMAND test_validate_transform)
     endif()
 
-    if(EXISTS ${PROJECT_SOURCE_DIR}/test_complexity.cpp)
-        add_executable(test_complexity ${PROJECT_SOURCE_DIR}/test_complexity.cpp)
-        target_link_libraries(test_complexity PRIVATE sssp_lib)
+    if(EXISTS ${PROJECT_SOURCE_DIR}/src/test_complexity.cpp)
+        add_executable(test_complexity ${PROJECT_SOURCE_DIR}/src/test_complexity.cpp)
+        target_link_libraries(test_complexity PRIVATE sssp_lib GTest::gtest_main)
         add_test(NAME test_complexity COMMAND test_complexity)
     endif()
 
     add_executable(test_base_case ${PROJECT_SOURCE_DIR}/test_base_case.cpp)
-    target_link_libraries(test_base_case PRIVATE sssp_lib)
+    target_link_libraries(test_base_case PRIVATE sssp_lib GTest::gtest_main)
     add_test(NAME test_base_case COMMAND test_base_case)
 
     add_executable(test_bmssp ${PROJECT_SOURCE_DIR}/test_bmssp.cpp)
-    target_link_libraries(test_bmssp PRIVATE sssp_lib)
+    target_link_libraries(test_bmssp PRIVATE sssp_lib GTest::gtest_main)
     add_test(NAME test_bmssp COMMAND test_bmssp)
 endif()
 

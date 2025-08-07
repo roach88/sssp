@@ -1,79 +1,122 @@
 #include "sssp/graph.hpp"
-#include <iostream>
-#include <cassert>
+#include <gtest/gtest.h>
 
 using namespace sssp;
 
-int main() {
-    // Test 1: Create empty graph
+class GraphTest : public ::testing::Test {
+protected:
+    void SetUp() override {
+        // Common setup if needed
+    }
+};
+
+TEST_F(GraphTest, EmptyGraphCreation) {
     Graph g;
-    assert(g.empty());
-    assert(g.num_vertices() == 0);
-    assert(g.num_edges() == 0);
-    std::cout << "Test 1 passed: Empty graph creation\n";
-    
-    // Test 2: Add vertices
+    EXPECT_TRUE(g.empty());
+    EXPECT_EQ(g.num_vertices(), 0);
+    EXPECT_EQ(g.num_edges(), 0);
+}
+
+TEST_F(GraphTest, VertexAddition) {
+    Graph g;
     g.add_vertex(0);
     g.add_vertex(1);
     g.add_vertex(2);
-    assert(!g.empty());
-    assert(g.num_vertices() == 3);
-    assert(g.has_vertex(0));
-    assert(g.has_vertex(1));
-    assert(g.has_vertex(2));
-    assert(!g.has_vertex(3));
-    std::cout << "Test 2 passed: Vertex addition\n";
-    
-    // Test 3: Add edges
+
+    EXPECT_FALSE(g.empty());
+    EXPECT_EQ(g.num_vertices(), 3);
+    EXPECT_TRUE(g.has_vertex(0));
+    EXPECT_TRUE(g.has_vertex(1));
+    EXPECT_TRUE(g.has_vertex(2));
+    EXPECT_FALSE(g.has_vertex(3));
+}
+
+TEST_F(GraphTest, EdgeAddition) {
+    Graph g;
+    g.add_vertex(0);
+    g.add_vertex(1);
+    g.add_vertex(2);
+
     g.add_edge(0, 1, 1.5);
     g.add_edge(1, 2, 2.0);
     g.add_edge(0, 2, 4.0);
-    assert(g.num_edges() == 3);
-    std::cout << "Test 3 passed: Edge addition\n";
-    
-    // Test 4: Check adjacency lists
+
+    EXPECT_EQ(g.num_edges(), 3);
+}
+
+TEST_F(GraphTest, AdjacencyListRetrieval) {
+    Graph g;
+    g.add_vertex(0);
+    g.add_vertex(1);
+    g.add_vertex(2);
+    g.add_edge(0, 1, 1.5);
+    g.add_edge(1, 2, 2.0);
+    g.add_edge(0, 2, 4.0);
+
     auto outgoing_0 = g.get_outgoing_edges(Vertex(0));
-    assert(outgoing_0.size() == 2);  // Edges to vertices 1 and 2
-    
+    EXPECT_EQ(outgoing_0.size(), 2);  // Edges to vertices 1 and 2
+
     auto outgoing_1 = g.get_outgoing_edges(Vertex(1));
-    assert(outgoing_1.size() == 1);  // Edge to vertex 2
-    
+    EXPECT_EQ(outgoing_1.size(), 1);  // Edge to vertex 2
+
     auto incoming_2 = g.get_incoming_edges(Vertex(2));
-    assert(incoming_2.size() == 2);  // Edges from vertices 0 and 1
-    std::cout << "Test 4 passed: Adjacency list retrieval\n";
-    
-    // Test 5: Check degrees
-    assert(g.out_degree(Vertex(0)) == 2);
-    assert(g.in_degree(Vertex(0)) == 0);
-    assert(g.out_degree(Vertex(2)) == 0);
-    assert(g.in_degree(Vertex(2)) == 2);
-    std::cout << "Test 5 passed: Degree calculation\n";
-    
-    // Test 6: Check if constant-degree transformation is needed
-    assert(!g.needs_constant_degree_transformation());
-    
+    EXPECT_EQ(incoming_2.size(), 2);  // Edges from vertices 0 and 1
+}
+
+TEST_F(GraphTest, DegreeCalculation) {
+    Graph g;
+    g.add_vertex(0);
+    g.add_vertex(1);
+    g.add_vertex(2);
+    g.add_edge(0, 1, 1.5);
+    g.add_edge(1, 2, 2.0);
+    g.add_edge(0, 2, 4.0);
+
+    EXPECT_EQ(g.out_degree(Vertex(0)), 2);
+    EXPECT_EQ(g.in_degree(Vertex(0)), 0);
+    EXPECT_EQ(g.out_degree(Vertex(2)), 0);
+    EXPECT_EQ(g.in_degree(Vertex(2)), 2);
+}
+
+TEST_F(GraphTest, ConstantDegreeTransformationCheck) {
+    Graph g;
+    g.add_vertex(0);
+    g.add_vertex(1);
+    g.add_vertex(2);
+    g.add_edge(0, 1, 1.5);
+    g.add_edge(1, 2, 2.0);
+    g.add_edge(0, 2, 4.0);
+
+    EXPECT_FALSE(g.needs_constant_degree_transformation());
+
     // Add more edges to trigger transformation need
     g.add_edge(1, 0, 1.0);
     g.add_edge(2, 0, 0.5);
-    
+
     // Now vertex 0 has in-degree of 2 and out-degree of 2
-    assert(!g.needs_constant_degree_transformation());
-    
+    EXPECT_FALSE(g.needs_constant_degree_transformation());
+
     // Add one more edge to exceed the limit
     g.add_edge(0, 1, 0.75);  // This gives vertex 0 out-degree of 3
-    assert(g.needs_constant_degree_transformation());
-    std::cout << "Test 6 passed: Constant-degree transformation check\n";
-    
-    // Test 7: Algorithm parameters
+    EXPECT_TRUE(g.needs_constant_degree_transformation());
+}
+
+TEST_F(GraphTest, AlgorithmParameters) {
+    Graph g;
+    g.add_vertex(0);
+    g.add_vertex(1);
+    g.add_vertex(2);
+    g.add_edge(0, 1, 1.5);
+    g.add_edge(1, 2, 2.0);
+    g.add_edge(0, 2, 4.0);
+
     std::size_t k = g.get_k();
     std::size_t t = g.get_t();
-    assert(k >= 1);
-    assert(t >= 1);
-    std::cout << "Test 7 passed: Algorithm parameters (k=" << k << ", t=" << t << ")\n";
-    
-    std::cout << "\nAll tests passed successfully!\n";
-    std::cout << "Graph has " << g.num_vertices() << " vertices and " 
-              << g.num_edges() << " edges.\n";
-    
-    return 0;
+    EXPECT_GE(k, 1);
+    EXPECT_GE(t, 1);
+}
+
+int main(int argc, char** argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }

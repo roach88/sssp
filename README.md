@@ -32,7 +32,7 @@ This library implements a novel SSSP algorithm that breaks the traditional Θ(n 
 
 - C++17 compatible compiler (GCC 7+, Clang 5+, MSVC 2017+)
 - CMake 3.14 or higher
-- (Optional) Google Test for running unit tests
+- Google Test (automatically downloaded via CMake FetchContent)
 
 ## Building
 
@@ -52,6 +52,17 @@ cmake --build . -j
 
 # Run tests
 ctest --output-on-failure
+
+# Or run individual test suites
+./build/test_binary_heap
+./build/test_block_structure
+./build/test_graph
+./build/test_transform
+./build/test_find_pivots
+./build/test_validate_transform
+./build/test_complexity
+./build/test_base_case
+./build/test_bmssp
 ```
 
 ### Profiling build
@@ -66,7 +77,7 @@ ctest --test-dir build-prof --output-on-failure
 ### Build Options
 
 - `CMAKE_BUILD_TYPE`: Set to `Debug` or `Release` (default: Release)
-- `BUILD_TESTS`: Enable building tests (default: ON)
+- `BUILD_TESTS`: Enable building tests with Google Test (default: ON)
 - `BUILD_EXAMPLES`: Enable building example programs (default: ON)
 
 ## Usage
@@ -165,12 +176,45 @@ Please see [CONTRIBUTING.md](docs/CONTRIBUTING.md) for development guidelines.
 
 ### Testing
 
-Run the test suite:
+The project uses Google Test framework for comprehensive unit and integration testing. All tests are automatically built when `BUILD_TESTS=ON` (default).
+
+Run the complete test suite:
 
 ```bash
 cd build
 ctest --verbose
 ```
+
+Run individual test suites:
+
+```bash
+# Unit tests
+./test_binary_heap
+./test_block_structure
+./test_graph
+./test_transform
+./test_find_pivots
+./test_validate_transform
+./test_complexity
+
+# Algorithm tests
+./test_base_case
+./test_bmssp
+
+# Smoke tests
+./test_paths
+./test_distance_queries
+./test_tie_break
+./test_api_smoke
+```
+
+Test Coverage:
+
+- **Data Structures**: Binary heap, block data structure, graph operations
+- **Algorithms**: BaseCase, BMSSP, FindPivots procedures
+- **Graph Transformations**: Constant-degree transformation and validation
+- **API Functions**: Distance queries, path reconstruction, tie-breaking
+- **Edge Cases**: Disconnected graphs, single vertices, complex scenarios
 
 ## Theory
 

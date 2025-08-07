@@ -21,7 +21,7 @@ jobs:
       - name: Install deps
         run: sudo apt-get update && sudo apt-get install -y cmake g++ clang
       - name: Configure
-        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DBUILD_TESTS=ON
         env:
           CC: ${{ matrix.compiler == 'clang' && 'clang' || 'gcc' }}
           CXX: ${{ matrix.compiler == 'clang' && 'clang++' || 'g++' }}
@@ -37,6 +37,8 @@ jobs:
       - name: Install deps
         run: sudo apt-get update && sudo apt-get install -y cmake g++
       - name: Configure (profiled)
-        run: cmake -S . -B build-prof -DCMAKE_BUILD_TYPE=Release -DSSSP_PROFILE=ON -DBUILD_BENCHMARKS=ON
+        run: cmake -S . -B build-prof -DCMAKE_BUILD_TYPE=Release -DSSSP_PROFILE=ON -DBUILD_BENCHMARKS=ON -DBUILD_TESTS=ON
       - name: Build (profiled)
         run: cmake --build build-prof -j
+      - name: Test (profiled)
+        run: ctest --test-dir build-prof --output-on-failure
