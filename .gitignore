@@ -37,6 +37,15 @@ compile_commands.json
 *.njsproj
 *.sln
 
+# Development tool directories
+.claude/
+.cursor/
+.taskmaster/
+
+# Development documentation
+CLAUDE.md
+spec.md
+
 # OS files
 .DS_Store
 Thumbs.db
