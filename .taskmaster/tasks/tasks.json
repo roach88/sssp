@@ -9,7 +9,7 @@
         "testStrategy": "Verify the repository structure and ensure CMake can generate build files without errors.",
         "priority": "medium",
         "dependencies": [],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -64,7 +64,7 @@
               "1.4"
             ],
             "details": "Stage all changes using 'git add .' and commit them with a message like 'Initial project setup'. Ensure that all files and directories are included in the commit.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Run 'git log' to verify that the commit is present and includes all intended files. Check that the repository is clean with 'git status'."
           }
         ]
@@ -79,7 +79,7 @@
         "dependencies": [
           1
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -87,7 +87,7 @@
             "description": "Create a class to represent a vertex in the graph, including necessary attributes.",
             "dependencies": [],
             "details": "Implement a Vertex class that includes attributes such as an identifier and any additional metadata needed for graph operations. Ensure the class is lightweight to handle large datasets efficiently.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Write unit tests to instantiate Vertex objects and verify attribute assignments."
           },
           {
@@ -98,7 +98,7 @@
               "2.1"
             ],
             "details": "Implement an Edge class with attributes for the source vertex, destination vertex, and a non-negative real number representing the weight. Ensure the class supports easy retrieval of these attributes.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Write unit tests to instantiate Edge objects and verify correct attribute storage and retrieval."
           },
           {
@@ -110,7 +110,7 @@
               "2.2"
             ],
             "details": "Implement a Graph class that maintains a collection of Vertex and Edge objects. Include data structures to efficiently store and access vertices and edges, such as adjacency lists or maps.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Write unit tests to instantiate the Graph object and verify the correct initialization of internal data structures."
           },
           {
@@ -121,7 +121,7 @@
               "2.3"
             ],
             "details": "Implement methods in the Graph class to add Vertex and Edge objects. Ensure that adding a vertex or edge updates the internal data structures appropriately, maintaining graph integrity.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Write unit tests to add vertices and edges to the graph and verify that the internal structures reflect these additions accurately."
           },
           {
@@ -132,7 +132,7 @@
               "2.4"
             ],
             "details": "Implement a method in the Graph class to return the adjacency list of a specified vertex. Ensure the method is efficient and can handle large graphs by leveraging the internal data structures.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Write unit tests to retrieve adjacency lists for various vertices and verify the correctness of the returned data."
           }
         ]
@@ -1375,7 +1375,7 @@
     ],
     "metadata": {
       "created": "2025-08-07T01:58:00.513Z",
-      "updated": "2025-08-07T02:59:21.383Z",
+      "updated": "2025-08-07T03:04:56.018Z",
       "description": "Tasks for master context"
     }
   }
